@@ -27,6 +27,7 @@ pub fn ArrayStack(comptime T: type) type {
                 .capacity = capacity,
                 .step = step,
                 .length = 0,
+
                 .allocator = allocator,
             };
         }
