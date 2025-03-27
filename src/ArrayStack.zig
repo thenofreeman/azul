@@ -58,13 +58,18 @@ pub fn ArrayStack(comptime T: type) type {
         }
 
         pub fn pop(self: *Self) !T {
-            if (self.length == 0) StackError.PopOnEmptyStack;
+            const popped_value = try self.top();
 
-            const popped_value = self.items[self.length - 1];
             self.items[self.length - 1] = undefined;
             self.length -= 1;
 
             return popped_value;
+        }
+
+        pub fn top(self: *Self) !T {
+            if (self.length == 0) StackError.PopOnEmptyStack;
+
+            return self.items[self.length - 1];
         }
     };
 }
