@@ -40,17 +40,17 @@ pub fn ArrayStack(comptime T: type) type {
 
         pub fn push(self: *Self, value: T) !void {
             if ((self.length + 1) > self.capacity) {
-                const newCapacity = self.capacity + self.step;
+                const new_capacity = self.capacity + self.step;
                 var alloc_buf = try self.allocator.alloc(
                     T,
-                    newCapacity,
+                    new_capacity,
                 );
 
                 @memcpy(alloc_buf[0..self.capacity], self.items);
 
                 self.allocator.free(self.items);
                 self.items = alloc_buf;
-                self.capacity = newCapacity;
+                self.capacity = new_capacity;
             }
 
             self.items[self.length] = value;
