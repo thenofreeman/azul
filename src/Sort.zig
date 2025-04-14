@@ -12,12 +12,12 @@ const std = @import("std");
 /// Runtime of Insertion Sort is O(n + I), where I is the number of inversions performed.
 pub fn insertionSort(comptime ListType: type, list: *ListType) void {
     var i: usize = 1;
-    var j: usize = 1;
 
     while (i < list.length()) : (i += 1) {
         const temp = list.atIndex(i);
 
-        j = i;
+        var j: usize = i;
+
         while (j > 0) : (j -= 1) {
             if (temp.compareTo(list.atIndex(j - 1)) >= 0) {
                 break;
@@ -51,13 +51,15 @@ pub fn bubbleSort(comptime ListType: type, list: *ListType) void {
 ///
 /// ...
 pub fn shellSort(comptime ListType: type, list: *ListType) void {
-    var i: usize = 0;
-    var j: usize = 0;
     var gap: usize = list.length() / 2;
 
     while (gap > 0) : (gap /= 2) {
+        var i: usize = 0;
+
         while (i < list.length()) : (i += 1) {
             const temp = list.atIndex(i);
+
+            var j: usize = 0;
 
             while (j >= gap) : (j -= gap) {
                 if (temp.compareTo(list.atIndex(j - gap)) >= 0) {
